@@ -29,6 +29,7 @@ class VOCDataset():
             'cow', 'diningtable', 'dog', 'horse',
             'motorbike', 'person', 'pottedplant',
             'sheep', 'sofa', 'train', 'tvmonitor']
+        self.idx_to_name = ['person', 'mobile']
         self.name_to_idx = dict([(v, k)
                                  for k, v in enumerate(self.idx_to_name)])
 
@@ -99,7 +100,7 @@ class VOCDataset():
             xmax = (float(bndbox.find('xmax').text) - 1) / w
             ymax = (float(bndbox.find('ymax').text) - 1) / h
             boxes.append([xmin, ymin, xmax, ymax])
-
+            
             labels.append(self.name_to_idx[name] + 1)
 
         return np.array(boxes, dtype=np.float32), np.array(labels, dtype=np.int64)
